@@ -1,6 +1,7 @@
 package org.example.features.search;
 
 import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
+import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Issue;
 import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
@@ -21,18 +22,6 @@ public class SearchByKeywordStoryCSV {
     private  String user;
     private  String pass;
 
-    /*public SearchByKeywordStoryCSV(String wordOne, String descriptionOne) {
-        this.wordOne = wordOne;
-        this.descriptionOne = descriptionOne;
-    }
-
-    @TestData
-    public static Collection<Object[]> testData(){
-        return Arrays.asList(new Object[][]{
-                {"apple",  "Bronze"},
-                {"pear",  "Bronze"}
-        });
-    }*/
 
     @Managed(uniqueSession = true, driver="chrome")
     public WebDriver webdriver;
@@ -53,9 +42,12 @@ public class SearchByKeywordStoryCSV {
     public void test_login() throws InterruptedException {
         dictSteps.login(user,pass);
         if(user.equals("gtrompi@yahoo.com")){
-            dictSteps.verifyGoodLogin();
+            dictSteps.verifyGoodLogin(webdriver);
+        }else{
+            dictSteps.verifyBadLogin(webdriver);
         }
     }
+
 
 
 
